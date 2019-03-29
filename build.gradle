@@ -1,0 +1,35 @@
+plugins {
+    id "java-library"
+}
+apply plugin: 'maven-publish'
+
+
+dependencies {
+    api 'org.atteo.classindex:classindex:3.4'
+    api 'io.skerna.commons:skerna-utils'
+    // https://mvnrepository.com/artifact/org.jooq/joor-java-8
+    testImplementation 'org.jooq:joor-java-8:0.9.10'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.3.1'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.3.1'
+}
+
+test {
+    useJUnitPlatform()
+}
+
+compileJava   {
+    sourceCompatibility = '1.8'
+    targetCompatibility = '1.8'
+}
+publishing {
+    publications {
+        maven(MavenPublication) {
+            groupId project.group
+            artifactId project.name
+            version project.version
+
+            from components.java
+        }
+    }
+}
+
