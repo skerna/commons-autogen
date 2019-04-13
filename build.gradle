@@ -4,9 +4,13 @@ plugins {
 apply plugin: 'maven-publish'
 
 
+repositories {
+    mavenCentral()
+}
+
 dependencies {
     api 'org.atteo.classindex:classindex:3.4'
-    api 'io.skerna.commons:skerna-utils'
+    api "io.skerna.commons:commons-utils:$skernaVersion"
     // https://mvnrepository.com/artifact/org.jooq/joor-java-8
     testImplementation 'org.jooq:joor-java-8:0.9.10'
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.3.1'
