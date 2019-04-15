@@ -26,7 +26,14 @@ public class GenericExtensionFactory implements ExtensionFactory {
 2 Añade el procesador a tu proyecto si usas kotlin usa kapt
 
 ```gradle
-dependencies{
- annotationProcessor 'io.skerna.commons:skerna-autogen:1.0.0-SNAPSHOT'
-}
+    allprojects {
+		repositories {
+			...
+			maven { url 'https://jitpack.io' }
+		}
+	}
+	
+	dependencies {
+    	        implementation 'com.gitlab.skerna.libs:commons-autogen:Tag'
+    }
 ```
