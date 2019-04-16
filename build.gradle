@@ -1,17 +1,19 @@
 plugins {
     id "java-library"
+    id "com.jfrog.bintray" version "1.8.4"
+
 }
 apply plugin: 'maven-publish'
 
 
 repositories {
     mavenCentral()
-    maven { url "https://jitpack.io" }
+    maven { url  "https://dl.bintray.com/skerna/maven" }
 }
 
 dependencies {
     api 'org.atteo.classindex:classindex:3.4'
-    api "com.gitlab.skerna.libs:commons-utils:$skernaVersion"
+    api "io.skerna.libs:commons-utils:$skernaVersion"
     // https://mvnrepository.com/artifact/org.jooq/joor-java-8
     testImplementation 'org.jooq:joor-java-8:0.9.10'
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.3.1'
@@ -26,15 +28,6 @@ compileJava   {
     sourceCompatibility = '1.8'
     targetCompatibility = '1.8'
 }
-publishing {
-    publications {
-        maven(MavenPublication) {
-            groupId project.group
-            artifactId project.name
-            version project.version
 
-            from components.java
-        }
-    }
-}
+apply from: project.rootProject.file('gradle/publish.gradle')
 

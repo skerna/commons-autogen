@@ -34,6 +34,6 @@ public class GenericExtensionFactory implements ExtensionFactory {
 	}
 	
 	dependencies {
-    	        implementation 'com.gitlab.skerna.libs:commons-autogen:Tag'
+    	        implementation 'io.skerna.libs:commons-autogen:Tag'
     }
 ```
