@@ -10,7 +10,7 @@ import java.util.*;
  * @author Ronald Cárdenas
  * project: skerna-commons created at 26/03/19
  **/
-@SupportedSourceVersion(SourceVersion.RELEASE_11)
+@SupportedSourceVersion(SourceVersion.RELEASE_8)
 public class MetaServicesGenerator extends AbstractProcessor {
     private Map<String, Set<String>> extensions = new HashMap<>(); // the key is the extension point
     private Storage storage;
