@@ -7,6 +7,10 @@ apply from: project.rootProject.file('gradle/maven-central.gradle')
 task stubJavadoc(type: Jar) {
     archiveClassifier = 'javadoc'
 }
+java {
+    withJavadocJar()
+    withSourcesJar()
+}
 
 
 publishing {

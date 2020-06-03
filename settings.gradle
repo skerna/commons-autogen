@@ -4,5 +4,6 @@ pluginManagement {
         id 'org.jetbrains.kotlin.jvm' version "$kotlin_version"
         id 'com.jfrog.bintray' version "$jfrog_version"
         id 'org.jetbrains.dokka' version "$dokka_version"
+        id "biz.aQute.bnd.builder" version "5.0.1"
     }
 }
