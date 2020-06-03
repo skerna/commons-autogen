@@ -10,7 +10,7 @@ import java.util.*;
  * @author Ronald Cárdenas
  * project: skerna-commons created at 26/03/19
  **/
-@SupportedSourceVersion(SourceVersion.RELEASE_8)
+@SupportedSourceVersion(SourceVersion.RELEASE_11)
 public class MetaServicesGenerator extends AbstractProcessor {
     private Map<String, Set<String>> extensions = new HashMap<>(); // the key is the extension point
     private Storage storage;
@@ -44,13 +44,13 @@ public class MetaServicesGenerator extends AbstractProcessor {
                     reporter.info("Solo se acepta clases, omitiendo @%s",element.getSimpleName());
                     continue;
                 }
-
+                reporter.info("Cast element " + element.asType().toString());
+                reporter.info("Name element " + element.getSimpleName());
                 TypeElement typeElement = (TypeElement) element;
                 String cannonicalClassname = typeElement.getQualifiedName().toString();
-
-                List<? extends AnnotationMirror> annotationMirrors = typeElement.getAnnotationMirrors();
-
                 reporter.info("Inspect class @%s", cannonicalClassname);
+                List<? extends AnnotationMirror> annotationMirrors = typeElement.getAnnotationMirrors();
+                reporter.info("Init loop on annotationMirrors", cannonicalClassname);
 
                 for (AnnotationMirror annotationMirror : annotationMirrors) {
 
@@ -63,14 +63,16 @@ public class MetaServicesGenerator extends AbstractProcessor {
                         Object value = entry.getValue().getValue();
                         switch (key) {
                             case "value":
-                                List<? extends AnnotationValue> typeMirrors = (List<? extends AnnotationValue>) value;
+                                if(value instanceof List){
+                                    List<? extends AnnotationValue> typeMirrors = (List<? extends AnnotationValue>) value;
 
-                                for (AnnotationValue typeMirror : typeMirrors) {
-                                    String providerContract = typeMirror.getValue().toString();
-                                    reporter.info(">>>> "+ providerContract);
-                                    getSetOfProviders(providerContract).add(cannonicalClassname);
+                                    for (AnnotationValue typeMirror : typeMirrors) {
+                                        String providerContract = typeMirror.getValue().toString();
+                                        reporter.info(">>>> "+ providerContract);
+                                        getSetOfProviders(providerContract).add(cannonicalClassname);
+                                    }
                                 }
-                                break;
+                             break;
                         }
                     }
                 }
